@@ -112,6 +112,12 @@ class AppTextStyles {
     color: AppColors.White,
   );
 
+  static TextStyle White40Regular = GoogleFonts.inter(
+    fontSize: 40.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.White,
+  );
+
   static TextStyle White13Medium = GoogleFonts.inter(
     fontSize: 13.sp,
     fontWeight: FontWeight.w500,
@@ -136,5 +142,15 @@ class AppTextStyles {
     color: AppColors.LightPurple,
   );
 
-  // باقي الـ styles...
+  static TextStyle LightPurple15Medium = GoogleFonts.inter(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.LightPurple,
+  );
+
+  static TextStyle White35Regular = GoogleFonts.sacramento(
+    fontSize: 35.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.White,
+  );
 }
