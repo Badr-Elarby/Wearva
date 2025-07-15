@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 10), () {
+      Future.delayed(const Duration(seconds: 40), () {
         if (mounted) {
           setState(() {
             _hideTexts = true;
@@ -44,70 +44,79 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.LightPurple,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedRotation(
-              turns: _hideLogo ? 1 : 0,
-              duration: const Duration(milliseconds: 700),
-              curve: Curves.easeIn,
-              child: AnimatedOpacity(
-                opacity: _hideLogo ? 0.0 : 1.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.LightPurple, AppColors.Gray],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedRotation(
+                turns: _hideLogo ? 1 : 0,
                 duration: const Duration(milliseconds: 700),
-                child: Image.asset('assets/images/logo.png', height: 250.h)
-                    .animate()
-                    .fadeIn(duration: 1200.ms)
-                    .scale(duration: 1000.ms)
-                    .slideY(begin: 0.3),
-              ),
-            ),
-
-            SizedBox(height: 5.h),
-
-            AnimatedSlide(
-              offset: _hideTexts ? const Offset(0, 2) : Offset.zero,
-              duration: const Duration(milliseconds: 700),
-              curve: Curves.easeIn,
-              child: AnimatedOpacity(
-                opacity: _hideTexts ? 0.0 : 1.0,
-                duration: const Duration(milliseconds: 500),
-                child: Shimmer.fromColors(
-                  baseColor: AppColors.White,
-                  highlightColor: AppColors.DarkCyanGray,
-                  period: const Duration(seconds: 3),
-                  child: Text('WEARVA', style: AppTextStyles.White40Regular)
+                curve: Curves.easeIn,
+                child: AnimatedOpacity(
+                  opacity: _hideLogo ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 700),
+                  child: Image.asset('assets/images/logo.png', height: 250.h)
                       .animate()
-                      .fadeIn(duration: 1000.ms, delay: 500.ms)
-                      .slideY(begin: 0.5),
+                      .fadeIn(duration: 1200.ms)
+                      .scale(duration: 1000.ms)
+                      .slideY(begin: 0.3),
                 ),
               ),
-            ),
 
-            SizedBox(height: 5.h),
+              SizedBox(height: 5.h),
 
-            AnimatedSlide(
-              offset: _hideTexts ? const Offset(0, 2) : Offset.zero,
-              duration: const Duration(milliseconds: 700),
-              curve: Curves.easeIn,
-              child: AnimatedOpacity(
-                opacity: _hideTexts ? 0.0 : 1.0,
-                duration: const Duration(milliseconds: 500),
-                child: Shimmer.fromColors(
-                      baseColor: AppColors.White,
-                      highlightColor: AppColors.DarkCyanGray,
-                      period: const Duration(seconds: 3),
-                      child: Text(
-                        'Find Your Style',
-                        style: AppTextStyles.White35Regular,
-                      ),
-                    )
-                    .animate()
-                    .fadeIn(duration: 1500.ms, delay: 1000.ms)
-                    .slideY(begin: 0.6),
+              AnimatedSlide(
+                offset: _hideTexts ? const Offset(0, 2) : Offset.zero,
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.easeIn,
+                child: AnimatedOpacity(
+                  opacity: _hideTexts ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 500),
+                  child: Shimmer.fromColors(
+                    baseColor: AppColors.White,
+                    highlightColor: AppColors.DarkCyanGray,
+                    period: const Duration(seconds: 3),
+                    child: Text('WEARVA', style: AppTextStyles.White40Regular)
+                        .animate()
+                        .fadeIn(duration: 1000.ms, delay: 500.ms)
+                        .slideY(begin: 0.5),
+                  ),
+                ),
               ),
-            ),
-          ],
+
+              SizedBox(height: 5.h),
+
+              AnimatedSlide(
+                offset: _hideTexts ? const Offset(0, 2) : Offset.zero,
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.easeIn,
+                child: AnimatedOpacity(
+                  opacity: _hideTexts ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 500),
+                  child: Shimmer.fromColors(
+                        baseColor: AppColors.White,
+                        highlightColor: AppColors.DarkCyanGray,
+                        period: const Duration(seconds: 3),
+                        child: Text(
+                          'Find Your Style',
+                          style: AppTextStyles.White35Regular,
+                        ),
+                      )
+                      .animate()
+                      .fadeIn(duration: 1500.ms, delay: 1000.ms)
+                      .slideY(begin: 0.6),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

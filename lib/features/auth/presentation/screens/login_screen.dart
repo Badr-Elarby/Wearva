@@ -172,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: EdgeInsets.symmetric(vertical: 16.h),
                           ),
                           onPressed: () {
-                            // Login logic here
+                            context.go('/GenderSelection');
                           },
                           child: Text(
                             'Login',
