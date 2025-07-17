@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stylish_shopping/features/Home/presentation/screens/home_screen.dart';
 import 'package:stylish_shopping/features/auth/presentation/screens/login_screen.dart';
 import 'package:stylish_shopping/features/auth/presentation/screens/signup_screen.dart';
 import 'package:stylish_shopping/features/onboarding/presentation/gender_selection_screen.dart';
@@ -30,6 +31,12 @@ final GoRouter appRouter = GoRouter(
       path: '/GenderSelection',
       name: 'GenderSelectionScreen',
       builder: (context, state) => const GenderSelectionScreen(),
+    ),
+
+    GoRoute(
+      path: '/Home',
+      name: 'HomeScreen',
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

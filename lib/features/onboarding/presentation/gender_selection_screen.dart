@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stylish_shopping/core/utils/app_colors.dart';
 import 'package:stylish_shopping/core/utils/app_styles.dart';
 
@@ -98,9 +99,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                             elevation: 4,
                             minimumSize: Size(double.infinity, 60.h),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                8.r,
-                              ), // بدل 30 خليها صغيرة
+                              borderRadius: BorderRadius.circular(8.r), //
                             ),
                           ),
                           onPressed: () {
@@ -114,7 +113,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                   SizedBox(height: 6.h),
                   TextButton(
                     onPressed: () {
-                      // هتعمل نافيجيشن بعدين
+                      context.go('/Home');
                     },
                     child: Text('Skip', style: AppTextStyles.Grey17Medium),
                   ),
