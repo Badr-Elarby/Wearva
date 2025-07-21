@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish_shopping/core/utils/app_colors.dart';
 import 'package:stylish_shopping/core/utils/app_styles.dart';
 import 'package:stylish_shopping/features/Home/presentation/widgets/BrandCard.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stylish_shopping/features/ProductDetails/presentation/ProductDetails.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -116,46 +118,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   childAspectRatio: 0.7,
                 ),
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.White,
-                      borderRadius: BorderRadius.circular(16.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16.r),
-                            ),
-                            child: Image.asset('assets/images/demo.png'),
-                          ), // صورة المنتج
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Product Name',
-                                style: AppTextStyles.AlmostBlack13Medium,
-                              ),
-                              SizedBox(height: 4.h),
-                              Text(
-                                '\$99.99',
-                                style: AppTextStyles.AlmostBlack13Semibold,
-                              ),
-                            ],
+                  return GestureDetector(
+                    onTap: () {
+                      context.push('/ProductDetails');
+                      // أو لو بتستخدم go_router:
+                      // context.go('/product-details');
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.White,
+                        borderRadius: BorderRadius.circular(16.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            offset: Offset(0, 2),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16.r),
+                              ),
+                              child: Image.asset('assets/images/demo.png'),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Product Name',
+                                  style: AppTextStyles.AlmostBlack15Semibold,
+                                ),
+                                SizedBox(height: 4.h),
+                                Text(
+                                  '\$99.99',
+                                  style: AppTextStyles.AlmostBlack13Semibold,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -172,6 +181,11 @@ class _HomeScreenState extends State<HomeScreen> {
             _selectedIndex = index;
             // هنا ممكن تضيف نافيجيشن حقيقي بعدين
           });
+          if (index == 2) {
+            // Cart icon
+            context.push('/CartScreen');
+          }
+          // يمكنك إضافة نافيجيشن لباقي الأيقونات هنا لو حبيت
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.LightPurple,
