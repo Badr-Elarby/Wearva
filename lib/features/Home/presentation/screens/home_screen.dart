@@ -4,7 +4,6 @@ import 'package:stylish_shopping/core/utils/app_colors.dart';
 import 'package:stylish_shopping/core/utils/app_styles.dart';
 import 'package:stylish_shopping/features/Home/presentation/widgets/BrandCard.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stylish_shopping/features/ProductDetails/presentation/ProductDetails.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,6 +14,52 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  // قائمة المنتجات مع حالة المفضلة
+  final List<Map<String, dynamic>> products = [
+    {
+      'id': '1',
+      'name': 'Nike Sportswear Club Fleece',
+      'price': 99.99,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+    {
+      'id': '2',
+      'name': 'Trail Running Jacket Nike Windrunner',
+      'price': 99.99,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+    {
+      'id': '3',
+      'name': 'Training Top Nike Sport Clash',
+      'price': 100.00,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+    {
+      'id': '4',
+      'name': 'Trail Running Jacket Nike Windrunner',
+      'price': 70.00,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+    {
+      'id': '5',
+      'name': 'Nike Sportswear Club Fleece',
+      'price': 99.99,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+    {
+      'id': '6',
+      'name': 'Trail Running Jacket Nike Windrunner',
+      'price': 99.99,
+      'image': 'assets/images/demo.png',
+      'isLiked': false,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 6,
+                itemCount: products.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 16.h,
@@ -118,11 +163,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   childAspectRatio: 0.7,
                 ),
                 itemBuilder: (context, index) {
+                  final product = products[index];
                   return GestureDetector(
                     onTap: () {
                       context.push('/ProductDetails');
-                      // أو لو بتستخدم go_router:
-                      // context.go('/product-details');
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -139,11 +183,49 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16.r),
-                              ),
-                              child: Image.asset('assets/images/demo.png'),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16.r),
+                                  ),
+                                  child: Image.asset(
+                                    product['image'],
+                                    width: double.infinity,
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                ),
+                                // Like Button
+                                Positioned(
+                                  top: 8.h,
+                                  right: 8.w,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        product['isLiked'] =
+                                            !product['isLiked'];
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(4.w),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.White,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        product['isLiked']
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        size: 20.sp,
+                                        color:
+                                            product['isLiked']
+                                                ? AppColors.Red
+                                                : AppColors.AlmostBlack,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -152,12 +234,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Product Name',
+                                  product['name'],
                                   style: AppTextStyles.AlmostBlack15Semibold,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
-                                  '\$99.99',
+                                  '\$${product['price'].toStringAsFixed(2)}',
                                   style: AppTextStyles.AlmostBlack13Semibold,
                                 ),
                               ],
@@ -179,13 +263,17 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
-            // هنا ممكن تضيف نافيجيشن حقيقي بعدين
           });
-          if (index == 2) {
+          if (index == 1) {
+            // Favourite icon
+            context.push('/FavouriteScreen');
+          } else if (index == 2) {
             // Cart icon
             context.push('/CartScreen');
+          } else if (index == 3) {
+            // Profile icon
+            context.push('/Profile');
           }
-          // يمكنك إضافة نافيجيشن لباقي الأيقونات هنا لو حبيت
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.LightPurple,

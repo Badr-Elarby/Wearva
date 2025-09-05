@@ -173,10 +173,7 @@ class CartScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
-                child: Text(
-                  'Continue Shopping',
-                  style: AppTextStyles.White17Medium,
-                ),
+                child: Text('Checkout', style: AppTextStyles.White17Medium),
               ),
             ),
             SizedBox(height: 16.h),

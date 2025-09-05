@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stylish_shopping/core/utils/app_colors.dart';
 import 'package:stylish_shopping/core/utils/app_styles.dart';
+import 'package:stylish_shopping/features/checkout/presentation/widgets/custom_moving_button.dart';
 
 class Address extends StatefulWidget {
   const Address({Key? key}) : super(key: key);
@@ -203,25 +204,7 @@ class _AddressScreenState extends State<Address> {
           16.w,
           MediaQuery.of(context).viewInsets.bottom + 16.h,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: double.infinity,
-            height: 60.h,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.LightPurple,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.r),
-                ),
-              ),
-              onPressed: () {
-                context.push('/OrderConfirmationScreen');
-              },
-              child: Text('Save Address', style: AppTextStyles.White17Medium),
-            ),
-          ),
-        ),
+        child: custom_moving_buttom(),
       ),
     );
   }
